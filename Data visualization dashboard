@@ -1,0 +1,728 @@
+# Statistics: Descriptive Statistics and Inferential Statistics
+
+Statistics is the science of collecting, analyzing, interpreting, and presenting data.
+
+There are two main branches:
+
+## 1. Descriptive Statistics
+
+Descriptive Statistics summarizes and describes the main features of data.
+
+### Example
+
+```python
+marks = [60, 70, 80, 90, 100]
+```
+
+Questions:
+
+* What is the average?
+* What is the highest value?
+* How spread out is the data?
+
+These are answered using Descriptive Statistics.
+
+---
+
+# 2. Inferential Statistics
+
+Inferential Statistics uses sample data to make predictions or conclusions about a population.
+
+### Example
+
+Survey 100 voters.
+
+Predict election results for 1 million voters.
+
+This is Inferential Statistics.
+
+---
+
+# DESCRIPTIVE STATISTICS
+
+---
+
+# Measure of Central Tendency
+
+Central Tendency tells us the center value of data.
+
+---
+
+## Mean (Average)
+
+Formula
+
+```text
+Mean = Sum of observations / Number of observations
+```
+
+### Python Code
+
+```python
+import numpy as np
+
+data = [10,20,30,40,50]
+
+mean = np.mean(data)
+
+print(mean)
+```
+
+Output
+
+```text
+30
+```
+
+---
+
+## Median
+
+Middle value after sorting.
+
+### Python Code
+
+```python
+import numpy as np
+
+data = [10,20,30,40,50]
+
+median = np.median(data)
+
+print(median)
+```
+
+Output
+
+```text
+30
+```
+
+---
+
+## Mode
+
+Most frequently occurring value.
+
+### Python Code
+
+```python
+from scipy import stats
+
+data = [1,2,2,2,3,4]
+
+mode = stats.mode(data)
+
+print(mode)
+```
+
+Output
+
+```text
+2
+```
+
+---
+
+# Measure of Dispersion
+
+Measures spread of data.
+
+---
+
+## Range
+
+```text
+Range = Maximum - Minimum
+```
+
+### Code
+
+```python
+data=[10,20,30,40,50]
+
+range_value=max(data)-min(data)
+
+print(range_value)
+```
+
+Output
+
+```text
+40
+```
+
+---
+
+## Variance
+
+Measures variability.
+
+### Code
+
+```python
+import numpy as np
+
+data=[10,20,30,40,50]
+
+print(np.var(data))
+```
+
+Output
+
+```text
+200
+```
+
+---
+
+## Standard Deviation
+
+Square root of variance.
+
+### Code
+
+```python
+import numpy as np
+
+data=[10,20,30,40,50]
+
+print(np.std(data))
+```
+
+Output
+
+```text
+14.14
+```
+
+---
+
+## Quartile Deviation
+
+```python
+import numpy as np
+
+data=[10,20,30,40,50]
+
+q1=np.percentile(data,25)
+
+q3=np.percentile(data,75)
+
+qd=(q3-q1)/2
+
+print(qd)
+```
+
+---
+
+## Coefficient of Variation
+
+```python
+import numpy as np
+
+data=[10,20,30,40,50]
+
+cv=(np.std(data)/np.mean(data))*100
+
+print(cv)
+```
+
+---
+
+# Graphs and Charts
+
+---
+
+## Univariate Plot
+
+Single Variable
+
+```python
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+tips=sns.load_dataset("tips")
+
+sns.histplot(tips["total_bill"])
+
+plt.show()
+```
+
+---
+
+## Bivariate Plot
+
+Two Variables
+
+```python
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+tips=sns.load_dataset("tips")
+
+sns.scatterplot(
+x="total_bill",
+y="tip",
+data=tips
+)
+
+plt.show()
+```
+
+---
+
+# Probability
+
+Probability measures chance of occurrence.
+
+```text
+P(E)=Favorable Outcomes/Total Outcomes
+```
+
+Example:
+
+```text
+Rolling Dice
+
+P(6)=1/6
+```
+
+---
+
+# Probability Distributions
+
+Common Distributions:
+
+* Normal Distribution
+* Binomial Distribution
+* Poisson Distribution
+* Uniform Distribution
+
+---
+
+# Normal Distribution
+
+Bell-shaped curve.
+
+Properties:
+
+* Mean = Median = Mode
+* Symmetrical
+
+### Code
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+data=np.random.normal(
+0,
+1,
+1000
+)
+
+plt.hist(data)
+
+plt.show()
+```
+
+---
+
+# Central Limit Theorem
+
+CLT says:
+
+Regardless of population distribution, sample means tend toward a normal distribution when sample size is large (n ≥ 30).
+
+---
+
+# Skewness
+
+Measures asymmetry.
+
+### Code
+
+```python
+from scipy.stats import skew
+
+data=[1,2,3,4,5]
+
+print(skew(data))
+```
+
+---
+
+### Types
+
+Positive Skew
+
+```text
+Tail towards right
+```
+
+Negative Skew
+
+```text
+Tail towards left
+```
+
+---
+
+# Kurtosis
+
+Measures peakness.
+
+```python
+from scipy.stats import kurtosis
+
+data=[1,2,3,4,5]
+
+print(kurtosis(data))
+```
+
+---
+
+# Correlation
+
+Measures relationship between variables.
+
+```python
+import pandas as pd
+
+df=pd.read_csv("data.csv")
+
+print(df.corr())
+```
+
+---
+
+# Goodness of Fit
+
+Checks whether observed data fits expected distribution.
+
+### Chi-Square Goodness of Fit
+
+```python
+from scipy.stats import chisquare
+
+observed=[20,30,50]
+
+expected=[25,25,50]
+
+print(
+chisquare(
+observed,
+expected
+)
+)
+```
+
+---
+
+# Normality Test
+
+### Shapiro Test
+
+```python
+from scipy.stats import shapiro
+import numpy as np
+
+data=np.random.normal(
+0,
+1,
+100
+)
+
+print(
+shapiro(data)
+)
+```
+
+If p-value > 0.05
+
+```text
+Data is Normal
+```
+
+---
+
+# Outlier Analysis
+
+### IQR Method
+
+```python
+import numpy as np
+
+data=[1,2,3,4,5,100]
+
+q1=np.percentile(data,25)
+
+q3=np.percentile(data,75)
+
+iqr=q3-q1
+
+lower=q1-1.5*iqr
+
+upper=q3+1.5*iqr
+
+outliers=[
+x for x in data
+if x<lower or x>upper
+]
+
+print(outliers)
+```
+
+Output
+
+```text
+[100]
+```
+
+---
+
+# Missing Values
+
+```python
+import pandas as pd
+
+df=pd.read_csv("data.csv")
+
+print(df.isnull().sum())
+```
+
+Fill Missing Values
+
+```python
+df.fillna(
+df.mean(),
+inplace=True
+)
+```
+
+---
+
+# INFERENTIAL STATISTICS
+
+Used to make conclusions from sample data.
+
+---
+
+# Hypothesis Testing
+
+---
+
+## Step 1
+
+Define Hypothesis
+
+### Null Hypothesis (H₀)
+
+```text
+No Difference
+```
+
+### Alternative Hypothesis (H₁)
+
+```text
+There is Difference
+```
+
+---
+
+## Step 2
+
+Select Significance Level
+
+Usually
+
+```text
+α = 0.05
+```
+
+---
+
+## Step 3
+
+Select Test
+
+* t-test
+* z-test
+* chi-square
+* ANOVA
+
+---
+
+## Step 4
+
+Calculate Test Statistic
+
+---
+
+## Step 5
+
+Calculate p-value
+
+---
+
+## Step 6
+
+Decision
+
+```text
+p < 0.05
+Reject H0
+```
+
+```text
+p > 0.05
+Accept H0
+```
+
+---
+
+# Type I Error
+
+Reject true H0
+
+```text
+False Positive
+```
+
+---
+
+# Type II Error
+
+Accept false H0
+
+```text
+False Negative
+```
+
+---
+
+# t-Test
+
+Compare means of two groups.
+
+```python
+from scipy.stats import ttest_ind
+
+group1=[80,85,90,88]
+
+group2=[70,75,78,72]
+
+t,p=ttest_ind(
+group1,
+group2
+)
+
+print(t)
+print(p)
+```
+
+---
+
+# z-Test
+
+```python
+from statsmodels.stats.weightstats import ztest
+
+data=[80,85,90,88,95]
+
+print(
+ztest(data,
+value=80)
+)
+```
+
+---
+
+# Chi-Square Test
+
+Categorical Data
+
+```python
+from scipy.stats import chi2_contingency
+
+table=[
+[10,20],
+[20,40]
+]
+
+chi,p,dof,exp=chi2_contingency(table)
+
+print(p)
+```
+
+---
+
+# ANOVA (F-Test)
+
+Compare 3 or more groups.
+
+```python
+from scipy.stats import f_oneway
+
+group1=[10,20,30]
+
+group2=[40,50,60]
+
+group3=[70,80,90]
+
+f,p=f_oneway(
+group1,
+group2,
+group3
+)
+
+print(f)
+print(p)
+```
+
+---
+
+# Interview Questions
+
+### What is Mean?
+
+Average value of dataset.
+
+### Difference between Mean and Median?
+
+* Mean affected by outliers.
+* Median not affected much.
+
+### What is Standard Deviation?
+
+Measures spread of data around mean.
+
+### What is Correlation?
+
+Measures relationship between variables.
+
+### What is p-value?
+
+Probability of getting observed results if Null Hypothesis is true.
+
+### Difference between Type I and Type II Error?
+
+| Type I         | Type II         |
+| -------------- | --------------- |
+| False Positive | False Negative  |
+| Reject true H₀ | Accept false H₀ |
+
+### When to use t-test?
+
+Compare means of two groups.
+
+### When to use ANOVA?
+
+Compare means of three or more groups.
+
+### When to use Chi-Square?
+
+For categorical variables and association testing.
+
+This covers the core Statistics syllabus used in Data Analyst, Data Scientist, Machine Learning, AI, and Business Analytics interviews, along with practical Python code.
